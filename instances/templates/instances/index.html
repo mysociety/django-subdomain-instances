@@ -6,5 +6,12 @@
     </head>
     <body>
         <h1>{% trans "Instances" %}</h1>
+        <ul>
+          {% for i in instances %}
+            <li><a href="{{ i.get_absolute_url }}">{{ i }}</a></li>
+          {% empty %}
+            <li>{% trans "No instances present." %}</li>
+          {% endfor %}
+        </ul>
     </body>
 </html>
