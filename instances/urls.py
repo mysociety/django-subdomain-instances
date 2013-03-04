@@ -1,4 +1,5 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic import ListView
 
 from instances.models import Instance
@@ -10,4 +11,6 @@ urlpatterns = patterns('',
         template_name = 'instances/index.html',
     )),
 )
+
+urlpatterns += staticfiles_urlpatterns()
 
