@@ -1,15 +1,15 @@
 Instances
 =========
 
-A way of allowing subdomains to be served by the same project, and associating
-objects with particular subdomains.
+A simple way of allowing subdomains to be served by the same project, and
+associating objects with particular subdomains.
 
 Installation
 ------------
 
-1. Set the `BASE_HOST` variable to your wildcarded domain, or for local
-   development we recommend 127.0.0.1.xip.io (a domain that points to
-   localhost).
+1. By default, it will work if you use 127.0.0.1.xip.io (a domain that points
+   to localhost) on port 80. To use a different base domain/port, set the
+   `BASE_HOST` and/or `BASE_PORT` variables.
 
 2. Add `instances` to your `INSTALLED_APPS`, and migrate to get the Instance
    database table.
@@ -25,6 +25,14 @@ Installation
 Requests to a subdomain will use your `ROOT_URLCONF` file; requests to the
 `BASE_HOST` will use `ROOT_URLCONF_HOST` or `instances.urls` by default (which
 just has one page that lists all instances)..
+
+Instance edit form
+------------------
+
+In your ROOT_URLCONF, use a line like the following to have a page for editing
+the title and description of an instance:
+
+`url(r'^instance/edit$', InstanceUpdate.as_view(), name='instance-edit')`
 
 Associating models
 ------------------
