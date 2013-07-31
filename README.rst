@@ -11,8 +11,8 @@ Installation
    to localhost) on port 80. To use a different base domain/port, set the
    `BASE_HOST` and/or `BASE_PORT` variables.
 
-2. Add `instances` to your `INSTALLED_APPS`, and migrate to get the Instance
-   database table.
+2. Add `instances` to your `INSTALLED_APPS` (and `South` if you're not using it
+   already), and migrate to get the Instance database table.
 
 3. Add Instance objects, with the label being the subdomain you wish to use.
    Optionally, associate users with these instances.
