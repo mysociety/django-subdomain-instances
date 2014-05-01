@@ -21,7 +21,7 @@ class Instance(models.Model):
     def get_absolute_url(self):
         url = 'http://%s.%s' % (self.label, getattr(settings, 'BASE_HOST', '127.0.0.1.xip.io'))
         if getattr(settings, 'BASE_PORT', None):
-            url += ':' + settings.BASE_PORT
+            url += ':%s' % settings.BASE_PORT
         return url
 
 class InstanceMixin(models.Model):
