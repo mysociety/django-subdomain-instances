@@ -9,13 +9,10 @@ from .models import Instance
 FAKE_URL = 'testing.example.org:8000'
 
 class InstanceClient(Client):
-    def get(self, *args, **kwargs):
-        kwargs['HTTP_HOST'] = FAKE_URL
-        return super(InstanceClient, self).get(*args, **kwargs)
-
-    def post(self, *args, **kwargs):
-        kwargs['HTTP_HOST'] = FAKE_URL
-        return super(InstanceClient, self).post(*args, **kwargs)
+    def __init__(self, enforce_csrf_checks=False, **defaults):
+        defaults.setdefault('HTTP_HOST', FAKE_URL)
+        super(InstanceClient, self).__init__(
+            enforce_csrf_checks=enforce_csrf_checks, **defaults)
 
 @override_settings(
     BASE_HOST='example.org',
