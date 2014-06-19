@@ -48,3 +48,10 @@ create/update view to store the current instance upon save, and allow editing
 only by those users associated with the instance. Remember to exclude
 `instance` from any model form, as it won't be seen.
 
+Running tests
+-------------
+
+.. code-block::
+
+    pip install -r requirements.txt
+    python runtests.py
