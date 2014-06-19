@@ -3,6 +3,7 @@ import re
 from django.db import models
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext as _
+from django.utils.six import with_metaclass
 
 label_re = re.compile(r'(?i)^[a-z0-9][a-z0-9-]*[a-z0-9]$')
 validate_label = RegexValidator(label_re, _("Enter a valid instance label consisting of letters, numbers, or hyphens."), 'invalid')
@@ -10,10 +11,8 @@ validate_label = RegexValidator(label_re, _("Enter a valid instance label consis
 from south.modelsinspector import add_introspection_rules
 add_introspection_rules([], ["^instances\.fields\.DNSLabelField"])
 
-class DNSLabelField(models.CharField):
+class DNSLabelField(with_metaclass(models.SubfieldBase, models.CharField)):
     description = "A DNS label"
-
-    __metaclass__ = models.SubfieldBase
 
     def __init__(self, *args, **kwargs):
         kwargs['max_length'] = kwargs.get('max_length', 63)
