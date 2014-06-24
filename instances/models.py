@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 
 from .fields import DNSLabelField
@@ -14,8 +13,17 @@ class Instance(models.Model):
     label = DNSLabelField( db_index=True, unique=True )
     title = models.CharField( max_length=100 )
     description = models.TextField( blank=True )
-    users = models.ManyToManyField(User, related_name='instances', blank=True)
-    created_by = models.ForeignKey(User, related_name='created_instances', null=True, blank=True)
+    users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name='instances',
+        blank=True,
+        )
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='created_instances',
+        null=True,
+        blank=True,
+        )
 
     def __str__(self):
         return u'Instance %s' % self.label

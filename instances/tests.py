@@ -2,7 +2,7 @@ from django.test import TestCase, LiveServerTestCase
 from django.test.client import Client
 from django.test.utils import override_settings
 from django.core.validators import ValidationError
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from .models import Instance
 
@@ -23,7 +23,7 @@ class InstanceTestCase(TestCase):
 
     def setUp(self):
         self.instance = Instance.objects.create(label='testing')
-        user = User.objects.create_user(username='admin', email='admin@example.org', password='admin')
+        user = get_user_model().objects.create_user(username='admin', email='admin@example.org', password='admin')
         user.instances.add(self.instance)
         self.client.login(username='admin', password='admin')
 
@@ -35,7 +35,7 @@ class InstanceTestCase(TestCase):
 class InstanceLiveServerTestCase(LiveServerTestCase):
     def setUp(self):
         self.instance = Instance.objects.create(label='testing')
-        user = User.objects.create_user(username='admin', email='admin@example.org', password='admin')
+        user = get_user_model().objects.create_user(username='admin', email='admin@example.org', password='admin')
         user.instances.add(self.instance)
 
         self.selenium.get('%s%s' % (self.live_server_url, '/accounts/login/?next=/'))
