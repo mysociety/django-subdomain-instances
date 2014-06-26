@@ -1,3 +1,6 @@
+v0.4, 2014-06-26
+    Fix for python3/hasattr Django issue.
+
 v0.3, 2014-06-20
     Easy test running and python3 compatibility (James McKinney).
 
