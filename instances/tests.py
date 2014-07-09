@@ -22,7 +22,7 @@ class InstanceTestCase(TestCase):
     client_class = InstanceClient
 
     def setUp(self):
-        self.instance = Instance.objects.create(label='testing')
+        self.instance = Instance.objects.create(label='testing', title="Test Instance")
         user = User.objects.create_user(username='admin', email='admin@example.org', password='admin')
         user.instances.add(self.instance)
         self.client.login(username='admin', password='admin')
@@ -34,7 +34,7 @@ class InstanceTestCase(TestCase):
 @override_settings( SESSION_COOKIE_DOMAIN='127.0.0.1.xip.io' )
 class InstanceLiveServerTestCase(LiveServerTestCase):
     def setUp(self):
-        self.instance = Instance.objects.create(label='testing')
+        self.instance = Instance.objects.create(label='testing', title="Test Instance")
         user = User.objects.create_user(username='admin', email='admin@example.org', password='admin')
         user.instances.add(self.instance)
 
