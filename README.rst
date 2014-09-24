@@ -53,5 +53,5 @@ Running tests
 
 .. code-block::
 
-    pip install -r requirements.txt
+    pip install .
     python runtests.py
