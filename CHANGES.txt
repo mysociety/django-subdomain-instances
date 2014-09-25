@@ -1,3 +1,6 @@
+v0.6, 2014-09-25
+    Remove South dependency, add initial Django 1.7 migration.
+
 v0.5, 2014-07-04
     Fix for use of ugettext at module level (James McKinney).
 
