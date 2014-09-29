@@ -1,3 +1,6 @@
+V0.7, 2014-09-29
+    Fix missing migrations and south_migrations packages in setup.py.
+
 v0.6, 2014-09-25
     Remove South dependency, add initial Django 1.7 migration.
 
