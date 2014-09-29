@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 import os
 
 file_dir = os.path.abspath(os.path.dirname(__file__))
@@ -18,9 +18,7 @@ setup(
     author='mySociety',
     author_email='matthew@mysociety.org',
     url='https://github.com/mysociety/django-subdomain-instances',
-    packages=[
-        'instances',
-    ],
+    packages=find_packages(),
     install_requires=[
         'Django >= 1.4, < 1.8',
     ],
