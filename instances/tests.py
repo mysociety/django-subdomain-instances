@@ -21,8 +21,12 @@ class InstanceClient(Client):
 class InstanceTestCase(TestCase):
     client_class = InstanceClient
 
+    # Override in a subclass if you need to change what the default instance
+    # created looks like.
+    default_instance_options = dict(label='testing', title="Test Instance")
+
     def setUp(self):
-        self.instance = Instance.objects.create(label='testing', title="Test Instance")
+        self.instance = Instance.objects.create(**self.default_instance_options)
         user = User.objects.create_user(username='admin', email='admin@example.org', password='admin')
         user.instances.add(self.instance)
         self.client.login(username='admin', password='admin')
@@ -33,9 +37,14 @@ class InstanceTestCase(TestCase):
 
 @override_settings( SESSION_COOKIE_DOMAIN='127.0.0.1.xip.io' )
 class InstanceLiveServerTestCase(LiveServerTestCase):
+    # Override in a subclass if you need to change what the default instance
+    # created looks like.
+    default_instance_options = dict(label='testing', title="Test Instance")
+
     def setUp(self):
-        self.instance = Instance.objects.create(label='testing', title="Test Instance")
-        user = User.objects.create_user(username='admin', email='admin@example.org', password='admin')
+        self.instance = Instance.objects.create(**self.default_instance_options)
+        user = User.objects.create_user(
+            username='admin', email='admin@example.org', password='admin')
         user.instances.add(self.instance)
 
         self.selenium.get('%s%s' % (self.live_server_url, '/accounts/login/?next=/'))
