@@ -1,4 +1,8 @@
-V0.7, 2014-09-29
+v0.8, 2014-10-03
+    Fix templates not being installed due to bug in setup.py
+    Allow testing setup defaults to be overridden.
+
+v0.7, 2014-09-29
     Fix missing migrations and south_migrations packages in setup.py.
 
 v0.6, 2014-09-25
