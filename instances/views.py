@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 from django.utils.decorators import available_attrs
 from django.views.generic import UpdateView
+from django.contrib.auth.decorators import login_required
+from django.views.generic.list import ListView
 
 from .models import Instance
 from .forms import InstanceForm
@@ -47,3 +49,19 @@ class InstanceUpdate(InstanceFormMixin, UpdateView):
 
     def get_object(self):
         return self.request.instance
+
+
+# Taken directly from the Django class based views documentation
+# https://docs.djangoproject.com/en/1.7/topics/class-based-views/intro/
+class LoginRequiredMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view)
+
+
+class YourInstances(LoginRequiredMixin, ListView):
+    template_name = 'instances/your_instances.html'
+
+    def get_queryset(self):
+        return Instance.objects.all().filter(users=self.request.user)
