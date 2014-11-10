@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
 
 from .fields import DNSLabelField
 
@@ -11,11 +12,18 @@ class InstanceManager(models.Manager):
 
 @python_2_unicode_compatible
 class Instance(models.Model):
-    label = DNSLabelField( db_index=True, unique=True )
-    title = models.CharField( max_length=100 )
-    description = models.TextField( blank=True )
-    users = models.ManyToManyField(User, related_name='instances', blank=True)
-    created_by = models.ForeignKey(User, related_name='created_instances', null=True, blank=True)
+    label = DNSLabelField(_('label'), db_index=True, unique=True)
+    title = models.CharField(_('title'), max_length=100)
+    description = models.TextField(_('description'), blank=True)
+    users = models.ManyToManyField(
+        User, verbose_name=_('users'), related_name='instances', blank=True)
+    created_by = models.ForeignKey(
+        User, verbose_name=_('created by'), related_name='created_instances',
+        null=True, blank=True)
+
+    class Meta:
+        verbose_name = _('instance')
+        verbose_name_plural = _('instances')
 
     def __str__(self):
         return u'Instance %s' % self.label
@@ -27,7 +35,7 @@ class Instance(models.Model):
         return url
 
 class InstanceMixin(models.Model):
-    instance = models.ForeignKey(Instance)
+    instance = models.ForeignKey(Instance, verbose_name=_('instance'))
 
     objects = InstanceManager()
 

@@ -1,0 +1,8 @@
+[main]
+host = https://www.transifex.com
+type = PO
+
+[django-subdomain-instances.django]
+file_filter = instances/locale/<lang>/LC_MESSAGES/django.po
+source_file = instances/locale/en/LC_MESSAGES/django.po
+source_lang = en
