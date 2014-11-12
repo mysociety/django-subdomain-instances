@@ -1,3 +1,6 @@
+v0.10.1, 2014-11-12
+    Include better waiting in Selenium testing.
+
 v0.10, 2014-11-10
     Add translation of form fields, and locale files.
 

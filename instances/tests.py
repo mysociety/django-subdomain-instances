@@ -4,6 +4,13 @@ from django.test.utils import override_settings
 from django.core.validators import ValidationError
 from django.contrib.auth.models import User
 
+try:
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+except ImportError:
+    pass
+
 from .models import Instance
 
 FAKE_URL = 'testing.example.org:8000'
@@ -53,7 +60,9 @@ class InstanceLiveServerTestCase(LiveServerTestCase):
 
         self.selenium.get(
             '%s%s' % (self.live_server_url, '/accounts/login/?next=/'))
-        username_input = self.selenium.find_element_by_name("username")
+        username_input = WebDriverWait(self.selenium, 10).until(
+            EC.presence_of_element_located((By.NAME, 'username'))
+        )
         username_input.send_keys('admin')
         password_input = self.selenium.find_element_by_name("password")
         password_input.send_keys('admin')
