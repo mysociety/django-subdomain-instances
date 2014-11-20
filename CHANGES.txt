@@ -1,3 +1,8 @@
+v0.10.2, 2014-11-20
+    Add Spanish translation (johnfelipe).
+    Remove a hard-coded http.
+    Fix flake8 issues.
+
 v0.10.1, 2014-11-12
     Include better waiting in Selenium testing.
 

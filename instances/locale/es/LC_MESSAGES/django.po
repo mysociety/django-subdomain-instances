@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# johnfelipe <ingenierofelipeurrego@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: django-subdomain-instances\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-10 16:11+0000\n"
+"PO-Revision-Date: 2014-11-12 20:28+0000\n"
+"Last-Translator: johnfelipe <ingenierofelipeurrego@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/django-subdomain-instances/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: fields.py:9
+msgid ""
+"Enter a valid instance label consisting of letters, numbers, or hyphens."
+msgstr ""
+"Introduzca una etiqueta de instancia válida que consiste de letras, números "
+"o guiones."
+
+#: models.py:15
+msgid "label"
+msgstr "etiqueta"
+
+#: models.py:16
+msgid "title"
+msgstr "título"
+
+#: models.py:17
+msgid "description"
+msgstr "descripción"
+
+#: models.py:19
+msgid "users"
+msgstr "usuarios"
+
+#: models.py:21
+msgid "created by"
+msgstr "creado por"
+
+#: models.py:25 models.py:38
+msgid "instance"
+msgstr "instancia"
+
+#: models.py:26
+msgid "instances"
+msgstr "instancias"
+
+#: templates/instances/index.html:4 templates/instances/index.html.py:8
+msgid "Instances"
+msgstr "Instancias"
+
+#: templates/instances/index.html:13
+msgid "No instances present."
+msgstr "No hay instancias presentes."
+
+#: templates/instances/instance_form.html:4
+#: templates/instances/instance_form.html:8
+msgid "Edit instance"
+msgstr "Editar instancia"
+
+#: templates/instances/instance_form.html:12
+msgid "Update instance"
+msgstr "Actualizar instancia"
