@@ -6,9 +6,11 @@ from django.utils.translation import ugettext_lazy as _
 
 from .fields import DNSLabelField
 
+
 class InstanceManager(models.Manager):
     def for_instance(self, instance):
         return self.get_query_set().filter(instance=instance)
+
 
 @python_2_unicode_compatible
 class Instance(models.Model):
@@ -33,6 +35,7 @@ class Instance(models.Model):
         if getattr(settings, 'BASE_PORT', None):
             url += ':%s' % settings.BASE_PORT
         return url
+
 
 class InstanceMixin(models.Model):
     instance = models.ForeignKey(Instance, verbose_name=_('instance'))

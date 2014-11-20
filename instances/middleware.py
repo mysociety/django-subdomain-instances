@@ -6,6 +6,7 @@ from django.utils.cache import patch_vary_headers
 
 from .models import Instance
 
+
 class MultiInstanceMiddleware:
     """
     Check for a hostname of the form <instance>.BASE_HOST, or <instance>.127.0.0.1.xip.io;
@@ -31,9 +32,9 @@ class MultiInstanceMiddleware:
                 url += ':' + matches.group('port')
             return HttpResponseRedirect(url)
 
-        request.is_user_instance = request.user.is_authenticated() and ( request.instance in request.user.instances.all() or request.user.is_superuser )
+        request.is_user_instance = request.user.is_authenticated() and (
+            request.instance in request.user.instances.all() or request.user.is_superuser)
 
     def process_response(self, request, response):
         patch_vary_headers(response, ('Host',))
         return response
-
