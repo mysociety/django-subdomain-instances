@@ -27,7 +27,10 @@ class MultiInstanceMiddleware:
         try:
             request.instance = Instance.objects.get(label=matches.group('instance'))
         except:
-            url = 'http://' + domain
+            url = '%(scheme)s://%(domain)s' % {
+                'scheme': 'https' if request.is_secure() else 'http',
+                'domain': domain,
+                }
             if matches.group('port'):
                 url += ':' + matches.group('port')
             return HttpResponseRedirect(url)
