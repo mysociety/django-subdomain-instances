@@ -17,7 +17,8 @@ Installation
 3. Add Instance objects, with the label being the subdomain you wish to use.
    Optionally, associate users with these instances.
 
-4. Add `instances.middleware.MultiInstanceMiddleware` to your middleware. Now
+4. Add `instances.middleware.MultiInstanceMiddleware` to your middleware; it
+   must come after AuthenticationMiddleware. Now
    if you go to `<subdomain>.<BASE_HOST>`, request.instance will be set to the
    matching Instance object. If there's a subdomain given but no match, it will
    redirect to `BASE_HOST`.
