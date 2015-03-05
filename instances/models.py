@@ -28,7 +28,7 @@ class Instance(models.Model):
         verbose_name_plural = _('instances')
 
     def __str__(self):
-        return u'Instance %s' % self.label
+        return u'%s (%s)' % (self.title, self.label)
 
     def get_absolute_url(self):
         url = 'http://%s.%s' % (self.label, getattr(settings, 'BASE_HOST', '127.0.0.1.xip.io'))
