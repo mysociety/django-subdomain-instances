@@ -1,3 +1,6 @@
+v0.10.3, 2015-10-01
+    Include migration required by verbose_name changes.
+
 v0.10.2, 2014-11-20
     Add Spanish translation (johnfelipe).
     Remove a hard-coded http.
