@@ -1,3 +1,7 @@
+v1.0, 2015-11-13
+    Drop support for Django prior to 1.8.
+    Change instance __str__ to return "title (label)" (Daniel Samuels).
+
 v0.10.3, 2015-10-01
     Include migration required by verbose_name changes.
 

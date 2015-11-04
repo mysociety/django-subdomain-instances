@@ -13,7 +13,7 @@ def read_file(filename):
 
 setup(
     name="django-subdomain-instances",
-    version='0.10.3',
+    version='1.0',
     description='A way of allowing subdomains to be served by the same project, '
                 'and associating objects with particular subdomains.',
     long_description=read_file('README.rst'),
@@ -23,7 +23,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'Django >= 1.4, < 1.8',
+        'Django >= 1.8.6',
     ],
     classifiers=[
         'Framework :: Django',

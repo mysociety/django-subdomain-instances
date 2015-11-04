@@ -18,11 +18,10 @@ if not settings.configured:
         ),
         MIDDLEWARE_CLASSES=(),
     )
-    if hasattr(django, 'setup'):  # Django 1.7
-        django.setup()
+    django.setup()
 
 if __name__ == '__main__':
-    from django.test.simple import DjangoTestSuiteRunner
-    runner = DjangoTestSuiteRunner(failfast=False)
+    from django.test.runner import DiscoverRunner
+    runner = DiscoverRunner(failfast=False)
     failures = runner.run_tests(['instances'])
     sys.exit(failures)

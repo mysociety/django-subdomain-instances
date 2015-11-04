@@ -9,12 +9,6 @@ label_re = re.compile(r'(?i)^[a-z0-9][a-z0-9-]*[a-z0-9]$')
 validate_label = RegexValidator(
     label_re, ugettext_lazy("Enter a valid instance label consisting of letters, numbers, or hyphens."), 'invalid')
 
-try:
-    from south.modelsinspector import add_introspection_rules
-    add_introspection_rules([], ["^instances\.fields\.DNSLabelField"])
-except ImportError:
-    pass
-
 
 class DNSLabelField(with_metaclass(models.SubfieldBase, models.CharField)):
     description = "A DNS label"

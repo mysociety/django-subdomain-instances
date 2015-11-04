@@ -39,11 +39,7 @@ class InstanceFormMixin(InstanceViewMixin):
     def form_valid(self, form):
         # If not present, fill in the instance from the request
         # Clash of naming two things 'instance' here, sorry.
-        try:
-            if hasattr(form, 'instance') and not hasattr(form.instance, 'instance'):
-                form.instance.instance = self.request.instance
-        # @see https://code.djangoproject.com/ticket/21563
-        except Instance.DoesNotExist:
+        if hasattr(form, 'instance') and not hasattr(form.instance, 'instance'):
             form.instance.instance = self.request.instance
         return super(InstanceFormMixin, self).form_valid(form)
 
