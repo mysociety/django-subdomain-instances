@@ -1,3 +1,7 @@
+v2.0, 2017-06-15
+    Add support for Django 1.10 and 1.11.
+    Switch from xip.io to nip.io.
+
 v1.0, 2015-11-13
     Drop support for Django prior to 1.8.
     Change instance __str__ to return "title (label)" (Daniel Samuels).
