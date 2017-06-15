@@ -6,6 +6,8 @@ python:
   - "3.4"
 env:
   - MODULES="Django>=1.8,<1.9"
+  - MODULES="Django>=1.10,<1.11"
+  - MODULES="Django>=1.11,<2.0"
 install:
   - pip install $MODULES
   - pip install -e .
