@@ -9,14 +9,14 @@ from .models import Instance
 
 class MultiInstanceMiddleware:
     """
-    Check for a hostname of the form <instance>.BASE_HOST, or <instance>.127.0.0.1.xip.io;
+    Check for a hostname of the form <instance>.BASE_HOST, or <instance>.127.0.0.1.nip.io;
     if not given, use ROOT_URLCONF_HOST or instances.urls as the urlconf. If given, check
     if it exists in the database; if not, redirect to BASE_HOST, if it does,
     set request.instance and check if the logged in user has access to it
     """
     def process_request(self, request):
         host = request.get_host().lower()
-        domain = getattr(settings, 'BASE_HOST', '127.0.0.1.xip.io')
+        domain = getattr(settings, 'BASE_HOST', '127.0.0.1.nip.io')
         pattern = r'^(?P<instance>.*?)\.%s(?::(?P<port>.*))?$' % re.escape(domain)
         matches = re.match(pattern, host)
         if not matches:

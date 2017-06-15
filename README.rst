@@ -7,7 +7,7 @@ associating objects with particular subdomains.
 Installation
 ------------
 
-1. By default, it will work if you use 127.0.0.1.xip.io (a domain that points
+1. By default, it will work if you use 127.0.0.1.nip.io (a domain that points
    to localhost) on port 80. To use a different base domain/port, set the
    `BASE_HOST` and/or `BASE_PORT` variables.
 

@@ -46,7 +46,7 @@ class InstanceTestCase(TestCase):
         return super(InstanceTestCase, self).assertRedirects(*args, **kwargs)
 
 
-@override_settings(SESSION_COOKIE_DOMAIN='127.0.0.1.xip.io')
+@override_settings(SESSION_COOKIE_DOMAIN='127.0.0.1.nip.io')
 class InstanceLiveServerTestCase(LiveServerTestCase):
     # Override in a subclass if you need to change what the default instance
     # created looks like.
