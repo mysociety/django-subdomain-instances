@@ -6,4 +6,5 @@ from .models import Instance
 class InstanceAdmin(admin.ModelAdmin):
     pass
 
+
 admin.site.register(Instance, InstanceAdmin)

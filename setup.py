@@ -11,9 +11,10 @@ def read_file(filename):
     filepath = os.path.join(file_dir, filename)
     return open(filepath).read()
 
+
 setup(
     name="django-subdomain-instances",
-    version='2.0',
+    version='3.0',
     description='A way of allowing subdomains to be served by the same project, '
                 'and associating objects with particular subdomains.',
     long_description=read_file('README.rst'),
@@ -23,9 +24,11 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        'Django >=1.8.6,<2.0',
+        'Django >=1.11',
     ],
     classifiers=[
         'Framework :: Django',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
     ],
 )

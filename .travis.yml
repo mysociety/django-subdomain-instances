@@ -1,15 +1,24 @@
+dist: xenial
+
 sudo: false
 
 language: python
-python:
-  - "2.7"
-  - "3.4"
+python: 3.5
+
+matrix:
+  include:
+    - python: 2.7
+      env: TOXENV=py27-1.11
+
 env:
-  - MODULES="Django>=1.8,<1.9"
-  - MODULES="Django>=1.10,<1.11"
-  - MODULES="Django>=1.11,<2.0"
+  matrix:
+    - TOXENV=flake8
+    - TOXENV=py35-1.11
+    - TOXENV=py35-2.1
+    - TOXENV=py35-2.2
+
 install:
-  - pip install $MODULES
-  - pip install -e .
+  - pip install tox
+
 script:
-  - python runtests.py
+  - tox

@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('label', instances.fields.DNSLabelField(unique=True, max_length=63, db_index=True)),
                 ('title', models.CharField(max_length=100)),
                 ('description', models.TextField(blank=True)),
-                ('created_by', models.ForeignKey(related_name='created_instances', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('created_by', models.ForeignKey(related_name='created_instances', blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL)),
                 ('users', models.ManyToManyField(related_name='instances', to=settings.AUTH_USER_MODEL, blank=True)),
             ],
             options={

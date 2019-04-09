@@ -21,6 +21,7 @@ class Instance(models.Model):
         User, verbose_name=_('users'), related_name='instances', blank=True)
     created_by = models.ForeignKey(
         User, verbose_name=_('created by'), related_name='created_instances',
+        on_delete=models.SET_NULL,
         null=True, blank=True)
 
     class Meta:
@@ -38,7 +39,7 @@ class Instance(models.Model):
 
 
 class InstanceMixin(models.Model):
-    instance = models.ForeignKey(Instance, verbose_name=_('instance'))
+    instance = models.ForeignKey(Instance, verbose_name=_('instance'), on_delete=models.CASCADE)
 
     objects = InstanceManager()
 

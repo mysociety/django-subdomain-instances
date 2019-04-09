@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='instance',
             name='created_by',
-            field=models.ForeignKey(related_name='created_instances', verbose_name='created by', blank=True, to=settings.AUTH_USER_MODEL, null=True),
+            field=models.ForeignKey(related_name='created_instances', verbose_name='created by', blank=True, to=settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL),
         ),
         migrations.AlterField(
             model_name='instance',

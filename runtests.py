@@ -16,7 +16,8 @@ if not settings.configured:
             'django.contrib.contenttypes',
             'instances',
         ),
-        MIDDLEWARE_CLASSES=(),
+        STATIC_URL='/static/',
+        MIDDLEWARE=(),
     )
     django.setup()
 

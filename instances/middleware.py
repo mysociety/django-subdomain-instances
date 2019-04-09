@@ -7,7 +7,7 @@ from django.utils.cache import patch_vary_headers
 from .models import Instance
 
 
-class MultiInstanceMiddleware:
+def MultiInstanceMiddleware(get_response):
     """
     Check for a hostname of the form <instance>.BASE_HOST, or <instance>.127.0.0.1.nip.io;
     if not given, use ROOT_URLCONF_HOST or instances.urls as the urlconf. If given, check
@@ -26,7 +26,7 @@ class MultiInstanceMiddleware:
 
         try:
             request.instance = Instance.objects.get(label=matches.group('instance'))
-        except:
+        except Instance.DoesNotExist:
             url = '%(scheme)s://%(domain)s' % {
                 'scheme': 'https' if request.is_secure() else 'http',
                 'domain': domain,
@@ -38,6 +38,11 @@ class MultiInstanceMiddleware:
         request.is_user_instance = request.user.is_authenticated() and (
             request.instance in request.user.instances.all() or request.user.is_superuser)
 
-    def process_response(self, request, response):
+    def middleware(request):
+        response = process_request(request)
+        if not response:
+            response = get_response(request)
         patch_vary_headers(response, ('Host',))
         return response
+
+    return middleware
