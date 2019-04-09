@@ -41,10 +41,6 @@ class InstanceTestCase(TestCase):
         user.instances.add(self.instance)
         self.client.login(username='admin', password='admin')
 
-    def assertRedirects(self, *args, **kwargs):
-        kwargs['host'] = FAKE_URL
-        return super(InstanceTestCase, self).assertRedirects(*args, **kwargs)
-
 
 @override_settings(SESSION_COOKIE_DOMAIN='127.0.0.1.nip.io')
 class InstanceLiveServerTestCase(LiveServerTestCase):
