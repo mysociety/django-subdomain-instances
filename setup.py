@@ -14,7 +14,7 @@ def read_file(filename):
 
 setup(
     name="django-subdomain-instances",
-    version='3.0.1',
+    version='3.0.2',
     description='A way of allowing subdomains to be served by the same project, '
                 'and associating objects with particular subdomains.',
     long_description=read_file('README.rst'),
