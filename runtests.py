@@ -17,6 +17,7 @@ if not settings.configured:
             'instances',
         ),
         STATIC_URL='/static/',
+        ALLOWED_HOSTS='*',
         MIDDLEWARE=(),
     )
     django.setup()

@@ -2,7 +2,8 @@ from django.test import TestCase, LiveServerTestCase
 from django.test.client import Client
 from django.test.utils import override_settings
 from django.core.validators import ValidationError
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AnonymousUser, User
+from django.http import HttpRequest, HttpResponse
 
 try:
     from selenium.webdriver.common.by import By
@@ -12,6 +13,7 @@ except ImportError:
     pass
 
 from .models import Instance
+from .middleware import MultiInstanceMiddleware
 
 FAKE_URL = 'testing.example.org:8000'
 
@@ -79,3 +81,47 @@ class SimpleTest(TestCase):
             ValidationError, lambda: Instance(label='Nor-a-symbol-such-as-^'))
         self.assertRaises(
             ValidationError, lambda: Instance(label="Nor-can-you-end-with--"))
+
+
+class MiddlewareTest(TestCase):
+    def setUp(self):
+        self.middleware = MultiInstanceMiddleware(lambda request: HttpResponse('hey'))
+        self.request = HttpRequest()
+        self.request.META = {
+            'SERVER_PORT': '80',
+        }
+
+    def test_no_match(self):
+        self.request.META['SERVER_NAME'] = 'localhost'
+        response = self.middleware(self.request)
+        self.assertEqual(response['Vary'], 'Host')
+        self.assertEqual(self.request.instance, None)
+        self.assertEqual(self.request.urlconf, 'instances.urls')
+        self.assertEqual(response.content, b'hey')
+
+    def test_bad_instance(self):
+        self.request.META['SERVER_NAME'] = 'testing.127.0.0.1.nip.io'
+        response = self.middleware(self.request)
+        self.assertEqual(response['Vary'], 'Host')
+        self.assertEqual(response['Location'], 'http://127.0.0.1.nip.io')
+
+    def test_good_instance(self):
+        self.request.META['SERVER_NAME'] = 'testing.127.0.0.1.nip.io'
+        self.instance = Instance.objects.create(label='testing')
+        self.request.user = AnonymousUser()
+        response = self.middleware(self.request)
+        self.assertEqual(response['Vary'], 'Host')
+        self.assertEqual(self.request.instance, self.instance)
+        self.assertEqual(self.request.is_user_instance, False)
+
+    def test_good_user_instance(self):
+        self.request.META['SERVER_NAME'] = 'testing.127.0.0.1.nip.io'
+        self.instance = Instance.objects.create(label='testing')
+        user = User.objects.create_user(
+            username='admin', email='admin@example.org', password='admin')
+        user.instances.add(self.instance)
+        self.request.user = user
+        response = self.middleware(self.request)
+        self.assertEqual(response['Vary'], 'Host')
+        self.assertEqual(self.request.instance, self.instance)
+        self.assertEqual(self.request.is_user_instance, True)

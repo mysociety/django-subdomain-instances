@@ -14,7 +14,7 @@ def MultiInstanceMiddleware(get_response):
     if it exists in the database; if not, redirect to BASE_HOST, if it does,
     set request.instance and check if the logged in user has access to it
     """
-    def process_request(self, request):
+    def process_request(request):
         host = request.get_host().lower()
         domain = getattr(settings, 'BASE_HOST', '127.0.0.1.nip.io')
         pattern = r'^(?P<instance>.*?)\.%s(?::(?P<port>.*))?$' % re.escape(domain)
