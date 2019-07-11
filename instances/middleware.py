@@ -35,7 +35,7 @@ def MultiInstanceMiddleware(get_response):
                 url += ':' + matches.group('port')
             return HttpResponseRedirect(url)
 
-        request.is_user_instance = request.user.is_authenticated() and (
+        request.is_user_instance = request.user.is_authenticated and (
             request.instance in request.user.instances.all() or request.user.is_superuser)
 
     def middleware(request):
