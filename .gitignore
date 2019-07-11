@@ -2,3 +2,4 @@
 /build/
 /dist/
 /django_subdomain_instances.egg-info/
+/.tox
